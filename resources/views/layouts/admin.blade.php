@@ -75,6 +75,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script src="{{ asset('js/appdev.js') }}"></script>
 </body>
 </html>

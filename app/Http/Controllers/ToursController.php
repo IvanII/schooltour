@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
+use App\Http\Requests\AddTourRequest;
 
 class ToursController extends Controller
 {
@@ -25,5 +26,33 @@ class ToursController extends Controller
         $tours = Tour::paginate(10);
 
         return view('admin.tours.index', ['tours' => $tours]);
+    }
+
+    /**
+     * Return view for create tour
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function adminCreate()
+    {
+        return view('admin.tours.create');
+    }
+
+    /**
+     * @param AddTourRequest $createRequest
+     */
+    public function adminAdd(AddTourRequest $createRequest)
+    {
+        $data = $createRequest->request->all();
+
+        $tour = new Tour();
+        $tour->title = $data['title'];
+        $tour->description = $data['description'];
+
+        if ($tour->save()) {
+            return redirect()->route('tours_list');
+        }
+
+
     }
 }

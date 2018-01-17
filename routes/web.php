@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/tours', 'ToursController@adminIndex');
+    Route::get('/tours', 'ToursController@adminIndex')->name('tours_list');
+    Route::post('/tours/add', 'ToursController@adminAdd');
+    Route::get('/tours/create', 'ToursController@adminCreate');
     Route::get('/bases', 'RecreationBasesController@adminIndex');
 });

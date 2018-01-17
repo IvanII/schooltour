@@ -16,7 +16,14 @@
                                 <th>Действия</th>
                             </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                            @foreach ($tours as $tour)
+                                <tr>
+                                    <td>{{ $tour->title }}</td>
+                                    <td>{{ strip_tags($tour->description) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
