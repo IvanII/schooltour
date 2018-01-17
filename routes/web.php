@@ -20,8 +20,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
+    //Tours
     Route::get('/tours', 'ToursController@adminIndex')->name('tours_list');
     Route::post('/tours/add', 'ToursController@adminAdd');
     Route::get('/tours/create', 'ToursController@adminCreate');
+
+    //Bases
     Route::get('/bases', 'RecreationBasesController@adminIndex');
+    Route::get('/bases/add', 'RecreationBasesController@adminCreate');
+    Route::post('/bases/add', 'RecreationBasesController@adminAdd');
 });

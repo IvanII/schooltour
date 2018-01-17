@@ -16,8 +16,16 @@
                                 <th>Действия</th>
                             </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                @foreach ($bases as $base)
+                                    <tr>
+                                        <td>{{ $base->title }}</td>
+                                        <td>{{ strip_tags($base->description) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
+                        {{ $base->links() }}
                     </div>
                 </div>
             </div>

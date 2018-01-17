@@ -25,3 +25,7 @@ var textarea = document.getElementById('ckeditortext');
 CKEDITOR.replace(textarea, {
     language: 'ru'
 });
+
+$( function() {
+    $(".js-datepicker").datepicker();
+} );
