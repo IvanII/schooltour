@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ToursController@index');
+Route::get('/tours/{id}', 'ToursController@show');
 
 Auth::routes();
 
@@ -26,7 +25,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/tours/create', 'ToursController@adminCreate');
 
     //Bases
-    Route::get('/bases', 'RecreationBasesController@adminIndex');
+    Route::get('/bases', 'RecreationBasesController@adminIndex')->name('bases_list');
     Route::get('/bases/add', 'RecreationBasesController@adminCreate');
     Route::post('/bases/add', 'RecreationBasesController@adminAdd');
 });

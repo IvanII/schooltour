@@ -36,9 +36,9 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    &nbsp;<li class="nav-item">Туры по России</li>
-                    <li class="nav-item">Базы отдыха</li>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{{ route('tours_list') }}">Туры по России</a></li>
+                    <li><a href="{{ route('bases_list') }}">Базы отдыха</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

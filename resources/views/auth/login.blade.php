@@ -66,8 +66,8 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
+
 @endsection
-=======
+
 @include('admin.partials.footer')
->>>>>>> 6220007fa442e880acf4cf83b18ac60c8803f81f
+

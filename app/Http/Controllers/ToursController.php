@@ -52,7 +52,19 @@ class ToursController extends Controller
         if ($tour->save()) {
             return redirect()->route('tours_list');
         }
+    }
 
+    public function index()
+    {
+        $tours = Tour::paginate(10);
 
+        return view('tours.index', ['tours' => $tours]);
+    }
+
+    public function show($id)
+    {
+        $tour = Tour::findOrFail($id);
+
+        return view('tours.show', ['tour' => $tour]);
     }
 }

@@ -25,7 +25,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $tour->links() }}
+                        {{ $tours->links() }}
                     </div>
                 </div>
             </div>
