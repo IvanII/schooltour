@@ -70,7 +70,7 @@ class ToursController extends Controller
         $tour->file_description = $fileName;
 
         if ($tour->save()) {
-//dd($fileName);
+
             mkdir('images/uploads/tours/' . $tour->id, 0777);
             $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
 
@@ -97,6 +97,16 @@ class ToursController extends Controller
         if ($tour->save()) {
             return redirect()->route('tours_list');
         }
+    }
+
+    /**
+     * @param int $id
+     */
+    public function adminDestroy($id)
+    {
+        Tour::destroy($id);
+
+        return redirect()->route('tours_list');
     }
 
     public function index()

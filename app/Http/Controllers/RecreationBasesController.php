@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\RecreationBase;
 use App\Models\Tour;
-use App\Http\Requests\AddTourRequest;
+use App\Http\Requests\AddBaseRequest;
+use App\Http\Requests\UpdateBaseRequest;
 
 class RecreationBasesController extends Controller
 {
@@ -52,9 +53,9 @@ class RecreationBasesController extends Controller
 
 
     /**
-     * @param AddTourRequest $createRequest
+     * @param AddBaseRequest $createRequest
      */
-    public function adminAdd(AddTourRequest $createRequest)
+    public function adminAdd(AddBaseRequest $createRequest)
     {
         $data = $createRequest->request->all();
 
@@ -65,7 +66,45 @@ class RecreationBasesController extends Controller
         if ($tour->save()) {
             return redirect()->route('tours_list');
         }
+    }
 
+    /**
+     * @param UpdateBaseRequest $createRequest
+     */
+    public function adminUpdate(UpdateBaseRequest $updateRequest, $id)
+    {
+        $data = $updateRequest->request->all();
 
+        $tour = RecreationBase::findOrFail($id);
+        $tour->title = $data['title'];
+        $tour->description = $data['description'];
+
+        if ($tour->save()) {
+            return redirect()->route('bases_list');
+        }
+    }
+
+    /**
+     * @param int $id
+     */
+    public function adminDestroy($id)
+    {
+        RecreationBase::destroy($id);
+
+        return redirect()->route('bases_list');
+    }
+
+    public function index()
+    {
+        $bases = RecreationBase::paginate(10);
+
+        return view('tours.index', ['bases' => $bases]);
+    }
+
+    public function show($id)
+    {
+        $base = RecreationBase::findOrFail($id);
+
+        return view('tours.show', ['base' => $base]);
     }
 }

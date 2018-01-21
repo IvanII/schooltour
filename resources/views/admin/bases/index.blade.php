@@ -22,6 +22,14 @@
                                     <tr>
                                         <td>{{ $base->title }}</td>
                                         <td>{{ strip_tags($base->description) }}</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{{ route('tour_edit', ['id' => $tour->id]) }}">Редактировать</a>
+                                            <form action="{{ route('tour_delete', ['id' => $tour->id]) }}" method="post">
+                                                {!! csrf_field() !!}
+                                                <input name="_method" type="hidden" value="delete">
+                                                <button class="btn btn-danger" type="submit">Удалить</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', 'ToursController@index');
+Route::get('/tours', 'ToursController@index');
+Route::get('/bases', 'RecreationBasesController@index');
+Route::get('/tours/{id}', 'ToursController@show')->name('tour_show');
+Route::get('/bases/{id}', 'RecreationBasesController@show')->name('bases_show');
 Route::get('/contacts', function () {
     return view('contacts');
 });
-Route::get('/tours/{id}', 'ToursController@show')->name('tour_show');
 
 Auth::routes();
 
@@ -28,9 +30,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/tours/add', 'ToursController@adminCreate')->name('tour_create');
     Route::get('/tours/edit/{id}', 'ToursController@adminEdit')->name('tour_edit');
     Route::put('/tours/update/{id}', 'ToursController@adminUpdate');
+    Route::delete('/tours/delete/{id}', 'ToursController@adminDestroy')->name('tour_delete');
 
     //Bases
     Route::get('/bases', 'RecreationBasesController@adminIndex')->name('bases_list');
     Route::get('/bases/add', 'RecreationBasesController@adminCreate')->name('base_create');
     Route::post('/bases/add', 'RecreationBasesController@adminAdd');
+    Route::get('/bases/edit/{id}', 'RecreationBasesController@adminEdit')->name('tour_edit');
+    Route::put('/bases/update/{id}', 'RecreationBasesController@adminUpdate');
+    Route::delete('/bases/delete/{id}', 'RecreationBasesController@adminDestroy')->name('tour_delete');
 });
