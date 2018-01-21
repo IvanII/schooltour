@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <a class="btn btn-primary" href="{{ route('base_create') }}">Добавить</a>
         <div class="row">
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -25,7 +26,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $base->links() }}
+                        {{ $bases->links() }}
                     </div>
                 </div>
             </div>

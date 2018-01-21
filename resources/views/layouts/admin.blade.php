@@ -36,10 +36,13 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{{ route('tours_list') }}">Туры по России</a></li>
-                    <li><a href="{{ route('bases_list') }}">Базы отдыха</a></li>
-                </ul>
+                @auth
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="{{ route('tours_list') }}">Туры по России</a></li>
+                        <li><a href="{{ route('bases_list') }}">Базы отдыха</a></li>
+                    </ul>
+                @endauth
+
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -77,7 +80,7 @@
 
 <!-- Scripts -->
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('js/appdev.js') }}"></script>
 </body>

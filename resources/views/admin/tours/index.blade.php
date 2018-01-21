@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <a class="btn btn-primary" href="{{ route('tour_create') }}">Добавить</a>
         <div class="row">
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -19,8 +20,9 @@
                             <tbody>
                             @foreach ($tours as $tour)
                                 <tr>
-                                    <td>{{ $tour->title }}</td>
-                                    <td>{{ strip_tags($tour->description) }}</td>
+                                    <td>{{ mb_substr($tour->title, 0, 45) }}</td>
+                                    <td>{{ mb_substr(strip_tags($tour->description), 0, 45) }}</td>
+                                    <td><a class="btn btn-primary" href="{{ route('tour_edit', ['id' => $tour->id]) }}">Редактировать</a><form action=""><button class="btn btn-danger" type="submit">Удалить</button></form></td>
                                 </tr>
                             @endforeach
                             </tbody>

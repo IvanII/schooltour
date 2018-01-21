@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
 use App\Http\Requests\AddTourRequest;
+use App\Http\Requests\UpdateTourRequest;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ToursController extends Controller
 {
@@ -39,15 +41,58 @@ class ToursController extends Controller
     }
 
     /**
+     * Return view for edit tour
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function adminEdit($id)
+    {
+        return view('admin.tours.edit', ['tour' => Tour::findOrFail($id)]);
+    }
+
+    /**
      * @param AddTourRequest $createRequest
      */
     public function adminAdd(AddTourRequest $createRequest)
     {
         $data = $createRequest->request->all();
+        $file = $createRequest->file();
+        $image = Image::make($file['image']);
+        $image->resize(246, 163);
+
+        $fileName = time() . $file['file_description']->getClientOriginalName();
+        $imageName = time() . $file['image']->getClientOriginalName();
 
         $tour = new Tour();
         $tour->title = $data['title'];
         $tour->description = $data['description'];
+        $tour->image = $imageName;
+        $tour->file_description = $fileName;
+
+        if ($tour->save()) {
+//dd($fileName);
+            mkdir('images/uploads/tours/' . $tour->id, 0777);
+            $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
+
+            mkdir('files/uploads/tours/' . $tour->id, 0777);
+            $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
+
+            return redirect()->route('tours_list');
+        }
+    }
+
+    /**
+     * @param AddTourRequest $createRequest
+     */
+    public function adminUpdate(UpdateTourRequest $updateRequest, $id)
+    {
+        $data = $updateRequest->request->all();
+        $file = $updateRequest->file();
+
+        $tour = Tour::findOrFail($id);
+        $tour->title = $data['title'];
+        $tour->description = $data['description'];
+        $tour->image = $data['description'];
 
         if ($tour->save()) {
             return redirect()->route('tours_list');

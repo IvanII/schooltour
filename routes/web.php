@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'ToursController@index');
-Route::get('/tours/{id}', 'ToursController@show');
+Route::get('/contacts', function () {
+    return view('contacts');
+});
+Route::get('/tours/{id}', 'ToursController@show')->name('tour_show');
 
 Auth::routes();
 
@@ -22,10 +25,12 @@ Route::prefix('admin')->group(function () {
     //Tours
     Route::get('/tours', 'ToursController@adminIndex')->name('tours_list');
     Route::post('/tours/add', 'ToursController@adminAdd');
-    Route::get('/tours/create', 'ToursController@adminCreate');
+    Route::get('/tours/add', 'ToursController@adminCreate')->name('tour_create');
+    Route::get('/tours/edit/{id}', 'ToursController@adminEdit')->name('tour_edit');
+    Route::put('/tours/update/{id}', 'ToursController@adminUpdate');
 
     //Bases
     Route::get('/bases', 'RecreationBasesController@adminIndex')->name('bases_list');
-    Route::get('/bases/add', 'RecreationBasesController@adminCreate');
+    Route::get('/bases/add', 'RecreationBasesController@adminCreate')->name('base_create');
     Route::post('/bases/add', 'RecreationBasesController@adminAdd');
 });

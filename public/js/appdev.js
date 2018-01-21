@@ -26,6 +26,6 @@ CKEDITOR.replace(textarea, {
     language: 'ru'
 });
 
-$( function() {
-    $(".js-datepicker").datepicker();
-} );
+// $( function() {
+//     $(".js-datepicker").datepicker();
+// } );

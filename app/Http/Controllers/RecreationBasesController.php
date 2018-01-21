@@ -30,7 +30,7 @@ class RecreationBasesController extends Controller
     }
 
     /**
-     * Return view for create tour
+     * Return view for edit base
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -38,6 +38,18 @@ class RecreationBasesController extends Controller
     {
         return view('admin.bases.create');
     }
+
+    /**
+     * Return view for edit base
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function adminEdit($id)
+    {
+        return view('admin.bases.edit', ['base' => RecreationBase::findOrFail($id)]);
+    }
+
+
 
     /**
      * @param AddTourRequest $createRequest
