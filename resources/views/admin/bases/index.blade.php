@@ -4,7 +4,7 @@
     <div class="container">
         <a class="btn btn-primary" href="{{ route('base_create') }}">Добавить</a>
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Базы отдыха</div>
 
@@ -23,8 +23,8 @@
                                         <td>{{ $base->title }}</td>
                                         <td>{{ strip_tags($base->description) }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{ route('tour_edit', ['id' => $tour->id]) }}">Редактировать</a>
-                                            <form action="{{ route('tour_delete', ['id' => $tour->id]) }}" method="post">
+                                            <a class="btn btn-primary" href="{{ route('base_edit', ['id' => $base->id]) }}">Редактировать</a>
+                                            <form action="{{ route('base_delete', ['id' => $base->id]) }}" method="post">
                                                 {!! csrf_field() !!}
                                                 <input name="_method" type="hidden" value="delete">
                                                 <button class="btn btn-danger" type="submit">Удалить</button>

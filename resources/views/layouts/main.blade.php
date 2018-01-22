@@ -16,12 +16,13 @@
 <section class="">
     <header>
         <div class="wrapper">
-            <a href="#"><img src="img/logo.png" class="logo" alt="" titl=""/></a>
-            <a href="#" class="hamburger"></a>
+            <a href="/"><img src="{{asset('images/logotip.png')}}" class="logo" alt="" titl=""/></a>
+            <a href="/" class="hamburger">Отдых для детей и <span style="margin-left: 53px;">их родителей</span></a>
             <nav>
                 <ul>
-                    <li><a href="#">Туры по России</a></li>
-                    <li><a href="#">Базы отдыха</a></li>
+                    <li><a href="{{ route('tours_index') }}">Туры по России</a></li>
+                    <li><a href="{{ route('bases_index') }}">Базы отдыха</a></li>
+                    <li><a href="{{ route('contacts') }}">Контакты</a></li>
                     {{--<li><a href="#">Sell</a></li>--}}
                     {{--<li><a href="#">About</a></li>--}}
                     {{--<li><a href="#">Contact</a></li>--}}
@@ -32,8 +33,8 @@
 
 </section><!--  end hero section  -->
 @yield('content')
-<footer>
-    <div class="wrapper footer">
+{{--<footer class="footer">--}}
+    {{--<div class="wrapper footer">--}}
         {{--<ul>--}}
             {{--<li class="links">--}}
                 {{--<ul>--}}
@@ -65,12 +66,12 @@
                 {{--</ul>--}}
             {{--</li>--}}
         {{--</ul>--}}
-    </div>
+    {{--</div>--}}
 
     {{--<div class="copyrights wrapper">--}}
         {{--Copyright © 2015 <a href="http://pixelhint.com" target="_blank" class="ph_link" title="Download more free Templates">Pixelhint.com</a>. All Rights Reserved.--}}
     {{--</div>--}}
-</footer><!--  end footer  -->
+{{--</footer>--}}
 <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 </body>

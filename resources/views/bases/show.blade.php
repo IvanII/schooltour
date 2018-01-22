@@ -2,9 +2,9 @@
 @section('content')
 <section class="listings">
     <div class="wrapper">
-        <h2>{{ $tour->title }}</h2>
+        <h2 style="text-align: center">{{ $base->title }}</h2>
         <div class="full-description">
-            {!! $tour->description !!}
+            {!! $base->description !!}
         </div>
     </div>
 </section>

@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Редактирование</div>
+                    <div class="panel-heading">Редактирование базы отдыха</div>
 
                     <div class="panel-body">
                         <form method="POST" action="{{action('RecreationBasesController@adminUpdate', ['id' => $base->id])}}">
@@ -19,16 +19,6 @@
                             <div class="form-group">
                                 <label for="ckeditortext">Описание</label>
                                 <textarea name="description" class="form-control" id="ckeditortext">{{ $base->description }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="date_end">Дата начала</label>
-                                <input name="date_start" type="text" class="form-control js-datepicker" id="date_start">
-                                {{--<small id="emailHelp" class="form-text text-muted">Название тура должно быть уникально</small>--}}
-                            </div>
-                            <div class="form-group">
-                                <label for="date_end">Дата конца</label>
-                                <input name="date_end" type="text" class="form-control js-datepicker" id="date_end">
-                                {{--<small id="emailHelp" class="form-text text-muted">Название тура должно быть уникально</small>--}}
                             </div>
                             <button type="submit" class="btn btn-primary">Сохранить</button>
                         </form>

@@ -71,10 +71,10 @@ class ToursController extends Controller
 
         if ($tour->save()) {
 
-            mkdir('images/uploads/tours/' . $tour->id, 0777);
+//            mkdir('images/uploads/tours/' . $tour->id, 0777);
             $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
 
-            mkdir('files/uploads/tours/' . $tour->id, 0777);
+//            mkdir('files/uploads/tours/' . $tour->id, 0777);
             $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
 
             return redirect()->route('tours_list');
@@ -87,12 +87,10 @@ class ToursController extends Controller
     public function adminUpdate(UpdateTourRequest $updateRequest, $id)
     {
         $data = $updateRequest->request->all();
-        $file = $updateRequest->file();
 
         $tour = Tour::findOrFail($id);
         $tour->title = $data['title'];
         $tour->description = $data['description'];
-        $tour->image = $data['description'];
 
         if ($tour->save()) {
             return redirect()->route('tours_list');

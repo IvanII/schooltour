@@ -3,12 +3,12 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Туры</div>
 
                     <div class="panel-body">
-                        <form enctype="multipart/form-data" method="POST" action="{{action('ToursController@adminAdd')}}">
+                        <form class="js-submitted-form" enctype="multipart/form-data" method="POST" action="{{action('ToursController@adminAdd')}}">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="title">Название</label>
@@ -27,7 +27,7 @@
                                 <label for="title">Файл с описанием</label>
                                 <input name="file_description" type="file" class="form-control">
                             </div>
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="submit" class="btn btn-primary js-button-submit">Сохранить</button>
                         </form>
                         <div></div>
                     </div>

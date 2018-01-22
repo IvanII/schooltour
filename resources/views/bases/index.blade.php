@@ -5,13 +5,13 @@
         <ul class="properties_list">
             @foreach($bases as $base)
             <li>
-                <a href="{{ route('tour_show', ['id' => $base->id]) }}">
+                <a href="{{ route('base_show', ['id' => $base->id]) }}">
                     {{--<img src="{{ asset('images/uploads/tours/' . $base->id . '/' . $base->image) }}" alt="" title="" class="property_img"/>--}}
                 </a>
                 {{--<span class="price">$2500</span>--}}
                 <div class="property_details">
                     <h1>
-                        <a href="{{ route('tour_show', ['id' => $tour->id]) }}">{{ $tour->title }}</a>
+                        <a href="{{ route('base_show', ['id' => $base->id]) }}">{{ $base->title }}</a>
                     </h1>
                 </div>
             </li>

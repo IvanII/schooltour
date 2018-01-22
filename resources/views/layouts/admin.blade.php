@@ -79,7 +79,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/full/ckeditor.js"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('js/appdev.js') }}"></script>

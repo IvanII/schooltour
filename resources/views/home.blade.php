@@ -1,23 +1,35 @@
-@extends('layouts.app')
-
+@extends('layouts.main')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
+    <section class="listings">
+        <div class="wrapper">
+            <ul class="properties_list">
+                <li>
+                    {{--<a href="{{ route('tour_show', ['id' => $tour->id]) }}">--}}
+{{--                        <img src="{{ asset('images/uploads/tours/' . $tour->id . '/' . $tour->image) }}" alt="" title="" class="property_img"/>--}}
+                    {{--</a>--}}
+                    {{--<span class="price">$2500</span>--}}
+                    <div class="property_details">
+                        <h1 style="text-align: center">
+                            <a href="{{ route('tours_index') }}">Туры по России</a>
+                        </h1>
+                    </div>
+                </li>
+                <li style="float: right;">
+                    {{--<a href="{{ route('tour_show', ['id' => $tour->id]) }}">--}}
+{{--                        <img src="{{ asset('images/uploads/tours/' . $tour->id . '/' . $tour->image) }}" alt="" title="" class="property_img"/>--}}
+                    {{--</a>--}}
+                    {{--<span class="price">$2500</span>--}}
+                    <div class="property_details">
+                        <h1 style="text-align: center">
+                            <a href="{{ route('bases_index') }}">Базы отдыха</a>
+                        </h1>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
-</div>
+    </section>
+    <footer class="footer">
+        <div class="wrapper footer">
+        </div>
+    </footer>
 @endsection

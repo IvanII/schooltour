@@ -64,7 +64,7 @@ class RecreationBasesController extends Controller
         $tour->description = $data['description'];
 
         if ($tour->save()) {
-            return redirect()->route('tours_list');
+            return redirect()->route('bases_list');
         }
     }
 
@@ -98,13 +98,13 @@ class RecreationBasesController extends Controller
     {
         $bases = RecreationBase::paginate(10);
 
-        return view('tours.index', ['bases' => $bases]);
+        return view('bases.index', ['bases' => $bases]);
     }
 
     public function show($id)
     {
         $base = RecreationBase::findOrFail($id);
 
-        return view('tours.show', ['base' => $base]);
+        return view('bases.show', ['base' => $base]);
     }
 }

@@ -22,10 +22,16 @@
 // });
 
 var textarea = document.getElementById('ckeditortext');
-CKEDITOR.replace(textarea, {
-    language: 'ru'
-});
 
-// $( function() {
-//     $(".js-datepicker").datepicker();
-// } );
+if (textarea) {
+    CKEDITOR.replace(textarea, {
+        language: 'ru'
+    });
+}
+
+
+$(function() {
+    $('.js-submitted-form').on('submit', function () {
+        $('.js-button-submit').attr('disabled', true);
+    })
+});
