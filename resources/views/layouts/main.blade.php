@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Название</title>
+    <title>Школьные туры</title>
     <meta charset="utf-8">
-    <meta name="description" content="Туры для школьников"/>
+    <meta name="description" content="Экскурсионные туры для школьников и их родителей. Летний отдых в России и других странах"/>
+    <meta name="keywords" content="Туры для школьников, экскурсии, отдых для школьников, экскурсионные туры,туризм, путешествия, купить путевку, отдохнуть семьей, семейный отдых, школьные группы,познавательные экскурсии, туризм для школьников"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-
+    <meta name="yandex-verification" content="1fd61164ce0de709" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
 
@@ -13,14 +14,14 @@
 </head>
 <body>
 
-<section class="">
+<section class="page-wrap">
     <header>
         <div class="wrapper">
-            <a href="/"><img src="{{asset('images/logotip.png')}}" class="logo" alt="" titl=""/></a>
-            <a href="/" class="hamburger">Отдых для детей и <span style="margin-left: 53px;">их родителей</span></a>
+            <a href="/"><img src="{{asset('images/logotip2.png')}}" class="logo" alt="" titl=""/></a>
+            <a href="/" class="hamburger">Мир путешествий <span style="margin-left: 22px;">Мир познаний</span></a>
             <nav>
                 <ul>
-                    <li><a href="{{ route('tours_index') }}">Туры по России</a></li>
+                    <li><a href="{{ route('tours_index') }}">Экскурсионные туры</a></li>
                     <li><a href="{{ route('bases_index') }}">Базы отдыха</a></li>
                     <li><a href="{{ route('contacts') }}">Контакты</a></li>
                     {{--<li><a href="#">Sell</a></li>--}}
@@ -30,48 +31,33 @@
             </nav>
         </div>
     </header><!--  end header section  -->
-
+    @yield('content')
 </section><!--  end hero section  -->
-@yield('content')
-{{--<footer class="footer">--}}
-    {{--<div class="wrapper footer">--}}
-        {{--<ul>--}}
-            {{--<li class="links">--}}
-                {{--<ul>--}}
-                    {{--<li><a href="#">About</a></li>--}}
-                    {{--<li><a href="#">Support</a></li>--}}
-                    {{--<li><a href="#">Terms</a></li>--}}
-                    {{--<li><a href="#">Policy</a></li>--}}
-                    {{--<li><a href="#">Contact</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
+<footer class="site-footer">
+    <div class="wrapper footer">
+        <ul>
+            <li class="links">
+                <ul>
+                    <li><a href="#">Эксурсионные туры</a></li>
+                    <li><a href="#">Базы отдыха и эксурсии по Омску</a></li>
+                    <li><a href="#">Отдых для детей и взрослых</a></li>
+                    <li><a href="#">Отзывы</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </li>
 
-            {{--<li class="links">--}}
-                {{--<ul>--}}
-                    {{--<li><a href="#">Appartements</a></li>--}}
-                    {{--<li><a href="#">Houses</a></li>--}}
-                    {{--<li><a href="#">Villas</a></li>--}}
-                    {{--<li><a href="#">Mansions</a></li>--}}
-                    {{--<li><a href="#">...</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
 
-            {{--<li class="links">--}}
-                {{--<ul>--}}
-                    {{--<li><a href="#">New York</a></li>--}}
-                    {{--<li><a href="#">Los Anglos</a></li>--}}
-                    {{--<li><a href="#">Miami</a></li>--}}
-                    {{--<li><a href="#">Washington</a></li>--}}
-                    {{--<li><a href="#">...</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
-        {{--</ul>--}}
-    {{--</div>--}}
+            <li class="about">
+                <p>
+                    644029, г. Омск, ул. 20 Партсъезда, 37 к1, <br>
+                    Офис: 28  <br>
+                    Телефон: 8-913-633-25-57, 8-913-601-11-62, 51-80-99  <br>
+                </p>
 
-    {{--<div class="copyrights wrapper">--}}
-        {{--Copyright © 2015 <a href="http://pixelhint.com" target="_blank" class="ph_link" title="Download more free Templates">Pixelhint.com</a>. All Rights Reserved.--}}
-    {{--</div>--}}
-{{--</footer>--}}
+            </li>
+        </ul>
+    </div>
+</footer>
 <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 </body>

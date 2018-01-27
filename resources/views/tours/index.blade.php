@@ -17,6 +17,7 @@
             </li>
             @endforeach
         </ul>
+        {{$tours->links()}}
     </div>
 </section>
 @endsection

@@ -17,7 +17,7 @@ class ToursController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -71,10 +71,16 @@ class ToursController extends Controller
 
         if ($tour->save()) {
 
-//            mkdir('images/uploads/tours/' . $tour->id, 0777);
+            if (!is_dir(public_path('images/uploads/tours/' . $tour->id))) {
+                mkdir('images/uploads/tours/' . $tour->id, 0777);
+            }
+
             $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
 
-//            mkdir('files/uploads/tours/' . $tour->id, 0777);
+            if (!is_dir(public_path('files/uploads/tours/' . $tour->id))) {
+                mkdir('files/uploads/tours/' . $tour->id, 0777);
+            }
+
             $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
 
             return redirect()->route('tours_list');
@@ -109,7 +115,7 @@ class ToursController extends Controller
 
     public function index()
     {
-        $tours = Tour::paginate(10);
+        $tours = Tour::paginate(6);
 
         return view('tours.index', ['tours' => $tours]);
     }

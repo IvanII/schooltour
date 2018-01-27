@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -38,7 +37,7 @@
                 <!-- Left Side Of Navbar -->
                 @auth
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a href="{{ route('tours_list') }}">Туры по России</a></li>
+                        <li><a href="{{ route('tours_list') }}">Экскурсионные туры</a></li>
                         <li><a href="{{ route('bases_list') }}">Базы отдыха</a></li>
                     </ul>
                 @endauth
