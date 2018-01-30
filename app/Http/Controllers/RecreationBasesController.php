@@ -7,6 +7,7 @@ use App\Models\RecreationBase;
 use App\Models\Tour;
 use App\Http\Requests\AddBaseRequest;
 use App\Http\Requests\UpdateBaseRequest;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class RecreationBasesController extends Controller
 {
@@ -59,11 +60,25 @@ class RecreationBasesController extends Controller
     {
         $data = $createRequest->request->all();
 
-        $tour = new RecreationBase();
-        $tour->title = $data['title'];
-        $tour->description = $data['description'];
+        $file = $createRequest->file();
+        $image = Image::make($file['image']);
+        $image->resize(340, 225);
 
-        if ($tour->save()) {
+        $imageName = time() . $file['image']->getClientOriginalName();
+
+        $base = new RecreationBase();
+        $base->title = $data['title'];
+        $base->description = $data['description'];
+        $base->image = $imageName;
+
+        if ($base->save()) {
+
+            if (!is_dir(public_path('images/uploads/bases/' . $base->id))) {
+                mkdir('images/uploads/bases/' . $base->id, 0777);
+            }
+
+            $image->save(public_path('images/uploads/bases/' . $base->id . '/' . $imageName));
+
             return redirect()->route('bases_list');
         }
     }
@@ -75,11 +90,11 @@ class RecreationBasesController extends Controller
     {
         $data = $updateRequest->request->all();
 
-        $tour = RecreationBase::findOrFail($id);
-        $tour->title = $data['title'];
-        $tour->description = $data['description'];
+        $base = RecreationBase::findOrFail($id);
+        $base->title = $data['title'];
+        $base->description = $data['description'];
 
-        if ($tour->save()) {
+        if ($base->save()) {
             return redirect()->route('bases_list');
         }
     }

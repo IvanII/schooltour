@@ -492,7 +492,9 @@ header nav .login_btn:hover{
    color: #95badf;  
 } 
 
-
+a {
+    text-decoration: none;
+}
 
 
 

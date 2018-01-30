@@ -58,7 +58,7 @@ class ToursController extends Controller
         $data = $createRequest->request->all();
         $file = $createRequest->file();
         $image = Image::make($file['image']);
-        $image->resize(246, 163);
+        $image->resize(340, 225);
 
         $fileName = time() . $file['file_description']->getClientOriginalName();
         $imageName = time() . $file['image']->getClientOriginalName();
