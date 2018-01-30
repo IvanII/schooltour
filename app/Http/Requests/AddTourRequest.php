@@ -24,7 +24,24 @@ class AddTourRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'  => 'required',
+            'description'  => 'required',
+            'image'  => 'required',
+            'file_description'  => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Поле не может быть пустым',
+            'description.required'  => 'Поле не может быть пустым',
+            'image.file_description'  => 'Поле не может быть пустым',
         ];
     }
 }
