@@ -16,7 +16,7 @@
                         </div>
                     </a>
                 </li>
-                <li style="float: right;">
+                <li style="">
                     {{--<a href="{{ route('tour_show', ['id' => $tour->id]) }}">--}}
 {{--                        <img src="{{ asset('images/uploads/tours/' . $tour->id . '/' . $tour->image) }}" alt="" title="" class="property_img"/>--}}
                     {{--</a>--}}
@@ -25,6 +25,19 @@
                         <div class="property_details">
                             <h1 style="text-align: center">
                                 Базы отдыха и эксурсии по Омску
+                            </h1>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    {{--<a href="{{ route('tour_show', ['id' => $tour->id]) }}">--}}
+                    {{--                        <img src="{{ asset('images/uploads/tours/' . $tour->id . '/' . $tour->image) }}" alt="" title="" class="property_img"/>--}}
+                    {{--</a>--}}
+                    {{--<span class="price">$2500</span>--}}
+                    <a href="{{ route('family_index') }}">
+                        <div class="property_details">
+                            <h1 style="text-align: center">
+                                Отдых для детей и взрослых<br><br>
                             </h1>
                         </div>
                     </a>

@@ -8,12 +8,22 @@
             <ul class="nav" role="tablist">
                 <li role="presentation">
                     <a href="{{ url('/admin/tours') }}">
-                        Туры по России
+                        Экскурсионные туры
                     </a>
                 </li>
                 <li role="presentation">
                     <a href="{{ url('/admin/bases') }}">
-                        Базы отдыха
+                        Базы и экскурсии по Омску
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/family') }}">
+                        Отдых для детей и их родителей
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/testimonials') }}">
+                        Отзывы
                     </a>
                 </li>
             </ul>

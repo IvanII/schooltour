@@ -39,6 +39,8 @@
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="{{ route('tours_list') }}">Экскурсионные туры</a></li>
                         <li><a href="{{ route('bases_list') }}">Базы отдыха</a></li>
+                        <li><a href="{{ route('family_list') }}">Отдых для детей и взрослых</a></li>
+                        <li><a href="{{ route('testimonials_list') }}">Отзывы</a></li>
                     </ul>
                 @endauth
 
