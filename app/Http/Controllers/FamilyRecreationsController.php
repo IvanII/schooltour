@@ -8,6 +8,7 @@ use App\Http\Requests\AddTourRequest;
 use App\Http\Requests\UpdateTourRequest;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\FamilyRecreation;
+use App\Http\Requests\AddFamilyRecreationRequest;
 
 class FamilyRecreationsController extends Controller
 {
@@ -54,34 +55,36 @@ class FamilyRecreationsController extends Controller
     /**
      * @param AddTourRequest $createRequest
      */
-    public function adminAdd(AddTourRequest $createRequest)
+    public function adminAdd(AddFamilyRecreationRequest $createRequest)
     {
         $data = $createRequest->request->all();
-//        $file = $createRequest->file();
-//        $image = Image::make($file['image']);
-//        $image->resize(246, 163);
-//
-//        $fileName = time() . $file['file_description']->getClientOriginalName();
-//        $imageName = time() . $file['image']->getClientOriginalName();
+        $file = $createRequest->file();
+        $image = Image::make($file['image']);
+        $image->resize(340, 225);
+
+        $fileName = time() . $file['file_description']->getClientOriginalName();
+        $imageName = time() . $file['image']->getClientOriginalName();
 
         $family = new FamilyRecreation();
         $family->title = $data['title'];
         $family->description = $data['description'];
+        $family->image = $imageName;
+        $family->file_description = $fileName;
 
 
         if ($family->save()) {
 
-//            if (!is_dir(public_path('images/uploads/family/' . $tour->id))) {
-//                mkdir('images/uploads/family/' . $tour->id, 0777);
-//            }
-//
-//            $image->save(public_path('images/uploads/family/' . $tour->id . '/' . $imageName));
-//
-//            if (!is_dir(public_path('files/uploads/family/' . $tour->id))) {
-//                mkdir('files/uploads/family/' . $tour->id, 0777);
-//            }
-//
-//            $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
+            if (!is_dir(public_path('images/uploads/family/' . $family->id))) {
+                mkdir('images/uploads/family/' . $family->id, 0777);
+            }
+
+            $image->save(public_path('images/uploads/family/' . $family->id . '/' . $imageName));
+
+            if (!is_dir(public_path('files/uploads/family/' . $family->id))) {
+                mkdir('files/uploads/family/' . $family->id, 0777);
+            }
+
+            $file['file_description']->move(public_path('files/uploads/tours/' . $family->id), $fileName);
 
             return redirect()->route('family_list');
         }

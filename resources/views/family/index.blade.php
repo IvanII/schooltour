@@ -6,7 +6,7 @@
             @foreach($family as $familyItem)
             <li>
                 <a href="{{ route('family_show', ['id' => $familyItem->id]) }}">
-                    <img src="{{ asset('images/uploads/tours/' . $familyItem->id . '/' . $familyItem->image) }}" alt="" title="" class="property_img"/>
+                    <img src="{{ asset('images/uploads/family/' . $familyItem->id . '/' . $familyItem->image) }}" alt="" title="" class="property_img"/>
                 </a>
                 {{--<span class="price">$2500</span>--}}
                 <div class="property_details">
