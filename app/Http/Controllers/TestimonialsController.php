@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateTourRequest;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\FamilyRecreation;
 use App\Models\Testimonial;
+use App\Http\Requests\AddTestimonialRequest;
 
 class TestimonialsController extends Controller
 {
@@ -55,17 +56,31 @@ class TestimonialsController extends Controller
     /**
      * @param AddTourRequest $createRequest
      */
-    public function adminAdd(AddTourRequest $createRequest)
+    public function adminAdd(AddTestimonialRequest $createRequest)
     {
         $data = $createRequest->request->all();
+        $file = $createRequest->file();
+        $image = $file['image'] ? Image::make($file['image']) : false;
+
+        $imageName = $file['image'] ? time() . $file['image']->getClientOriginalName() : null;
 
 
-        $tour = new Testimonial();
-        $tour->author = $data['author'];
-        $tour->description = $data['description'];
+        $testimonial = new Testimonial();
+        $testimonial->author = $data['author'];
+        $testimonial->description = $data['description'];
 
+        if ($image) {
+            $testimonial->image = $imageName;
+        }
 
-        if ($tour->save()) {
+        if ($testimonial->save()) {
+
+            if ($image) {
+                if (!is_dir(public_path('images/uploads/testimonials/' . $testimonial->id))) {
+                    mkdir('images/uploads/testimonials/' . $testimonial->id, 0777);
+                }
+                $image->save(public_path('images/uploads/testimonials/' . $testimonial->id . '/' . $imageName));
+            }
 
             return redirect()->route('testimonials_list');
         }
@@ -77,12 +92,30 @@ class TestimonialsController extends Controller
     public function adminUpdate(UpdateTourRequest $updateRequest, $id)
     {
         $data = $updateRequest->request->all();
+        $file = $updateRequest->file();
+        $image = $file['image'] ? Image::make($file['image']) : false;
 
-        $tour = Testimonial::findOrFail($id);
-        $tour->author = $data['author'];
-        $tour->description = $data['description'];
+        $imageName = $file['image'] ? time() . $file['image']->getClientOriginalName() : null;
 
-        if ($tour->save()) {
+
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->author = $data['author'];
+        $testimonial->description = $data['description'];
+        $oldImage = $testimonial->image;
+
+        if ($image) {
+            $testimonial->image = $imageName;
+        }
+
+        if ($testimonial->save()) {
+
+            if ($image) {
+                if (!is_dir(public_path('images/uploads/testimonials/' . $testimonial->id))) {
+                    mkdir('images/uploads/testimonials/' . $testimonial->id, 0777);
+                }
+                $image->save(public_path('images/uploads/testimonials/' . $testimonial->id . '/' . $imageName));
+            }
+
             return redirect()->route('testimonials_list');
         }
     }
@@ -99,15 +132,15 @@ class TestimonialsController extends Controller
 
     public function index()
     {
-        $testimonials = Testimonial::paginate(6);
+        $testimonials = Testimonial::paginate(5);
 
         return view('testimonials.index', ['testimonials' => $testimonials]);
     }
 
-//    public function show($id)
-//    {
-//        $tour = Testimonial::findOrFail($id);
-//
-//        return view('family.show', ['tour' => $tour]);
-//    }
+    public function show($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+
+        return view('testimonials.show', ['testimonial' => $testimonial]);
+    }
 }

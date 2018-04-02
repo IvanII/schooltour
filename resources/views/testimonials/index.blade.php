@@ -6,7 +6,8 @@
             @foreach($testimonials as $testimonial)
             <div class="testimonial-item">
                 <div>
-                    {{ $testimonial->description }}
+                    {{ str_limit($testimonial->description, 350) }}
+                    <a style="color: #0c91e5" href="{{route('testimonial_show', ['id' => $testimonial->id])}}">Читать полностью</a>
                 </div>
                 <div class="testimonial-item_author">
                     {{ $testimonial->author }}

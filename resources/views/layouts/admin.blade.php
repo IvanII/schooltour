@@ -41,6 +41,7 @@
                         <li><a href="{{ route('bases_list') }}">Базы отдыха</a></li>
                         <li><a href="{{ route('family_list') }}">Отдых для детей и взрослых</a></li>
                         <li><a href="{{ route('testimonials_list') }}">Отзывы</a></li>
+                        <li><a href="{{ route('contacts_edit') }}">Контакты</a></li>
                     </ul>
                 @endauth
 

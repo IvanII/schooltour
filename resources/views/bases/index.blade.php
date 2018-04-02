@@ -6,7 +6,7 @@
             @foreach($bases as $base)
             <li>
                 <a href="{{ route('base_show', ['id' => $base->id]) }}">
-                    <img src="{{ asset('images/uploads/bases/' . $base->id . '/' . $base->image) }}" alt="" title="" class="property_img"/>
+                    <img src="{{ $base->image ? asset('images/uploads/bases/' . $base->id . '/' . $base->image) : '' }}" alt="" title="" class="property_img"/>
                 </a>
                 {{--<span class="price">$2500</span>--}}
                 <div class="property_details">

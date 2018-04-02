@@ -47,9 +47,9 @@
 
             <li class="about">
                 <p>
-                    644029, г. Омск, ул. 20 Партсъезда, 37 к1, <br>
-                    Офис: 28  <br>
-                    Телефон: 8-913-633-25-57, 8-913-601-11-62, 51-80-99  <br>
+                    {{ $contactsLayout->address }} <br>
+                    Офис: {{ $contactsLayout->office }}  <br>
+                    Телефон: {{ $contactsLayout->phone }}  <br>
                 </p>
 
             </li>

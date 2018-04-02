@@ -7,6 +7,7 @@ use App\Models\Tour;
 use App\Http\Requests\AddTourRequest;
 use App\Http\Requests\UpdateTourRequest;
 use Intervention\Image\ImageManagerStatic as Image;
+use League\Flysystem\File;
 
 class ToursController extends Controller
 {
@@ -57,31 +58,40 @@ class ToursController extends Controller
     {
         $data = $createRequest->request->all();
         $file = $createRequest->file();
-        $image = Image::make($file['image']);
+        $image = $file['image'] ? Image::make($file['image']) : false;
         $image->resize(340, 225);
 
-        $fileName = time() . $file['file_description']->getClientOriginalName();
-        $imageName = time() . $file['image']->getClientOriginalName();
+        $fileName = $file['file_description'] ? time() . $file['file_description']->getClientOriginalName() : null;
+        $imageName = $file['image'] ? time() . $file['image']->getClientOriginalName() : null;
 
         $tour = new Tour();
         $tour->title = $data['title'];
         $tour->description = $data['description'];
-        $tour->image = $imageName;
-        $tour->file_description = $fileName;
+
+        if ($image) {
+            $tour->image = $imageName;
+        }
+
+        if (!is_null($fileName)) {
+            $tour->file_description = $fileName;
+        }
 
         if ($tour->save()) {
 
-            if (!is_dir(public_path('images/uploads/tours/' . $tour->id))) {
-                mkdir('images/uploads/tours/' . $tour->id, 0777);
+            if ($image) {
+                if (!is_dir(public_path('images/uploads/tours/' . $tour->id))) {
+                    mkdir('images/uploads/tours/' . $tour->id, 0777);
+                }
+                $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
             }
 
-            $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
-
-            if (!is_dir(public_path('files/uploads/tours/' . $tour->id))) {
-                mkdir('files/uploads/tours/' . $tour->id, 0777);
+            if (!is_null($fileName)) {
+                if (!is_dir(public_path('files/uploads/tours/' . $tour->id))) {
+                    mkdir('files/uploads/tours/' . $tour->id, 0777);
+                }
+                $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
             }
 
-            $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
 
             return redirect()->route('tours_list');
         }
@@ -94,11 +104,44 @@ class ToursController extends Controller
     {
         $data = $updateRequest->request->all();
 
+        $file = $updateRequest->file();
+        $image = $file['image'] ? Image::make($file['image']) : false;
+        $image->resize(340, 225);
+
+        $fileName = $file['file_description'] ? time() . $file['file_description']->getClientOriginalName() : null;
+        $imageName = $file['image'] ? time() . $file['image']->getClientOriginalName() : null;
+        
+
         $tour = Tour::findOrFail($id);
         $tour->title = $data['title'];
         $tour->description = $data['description'];
 
+        $oldImage = $tour->image;
+        $oldFile = $tour->file_description;
+
+        if ($image) {
+            $tour->image = $imageName;
+        }
+
+        if (!is_null($fileName)) {
+            $tour->file_description = $fileName;
+        }
+
         if ($tour->save()) {
+            if ($image) {
+                if (!is_dir(public_path('images/uploads/tours/' . $tour->id))) {
+                    mkdir('images/uploads/tours/' . $tour->id, 0777);
+                }
+                $image->save(public_path('images/uploads/tours/' . $tour->id . '/' . $imageName));
+            }
+
+            if (!is_null($fileName)) {
+                if (!is_dir(public_path('files/uploads/tours/' . $tour->id))) {
+                    mkdir('files/uploads/tours/' . $tour->id, 0777);
+                }
+                $file['file_description']->move(public_path('files/uploads/tours/' . $tour->id), $fileName);
+            }
+
             return redirect()->route('tours_list');
         }
     }
@@ -115,7 +158,7 @@ class ToursController extends Controller
 
     public function index()
     {
-        $tours = Tour::paginate(6);
+        $tours = Tour::paginate(12);
 
         return view('tours.index', ['tours' => $tours]);
     }

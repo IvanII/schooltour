@@ -26,6 +26,11 @@
                         Отзывы
                     </a>
                 </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/contacts/edit') }}">
+                        Контакты
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateTourRequest;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\FamilyRecreation;
 use App\Http\Requests\AddFamilyRecreationRequest;
+use App\Http\Requests\UpdateFamilyRecreationRequest;
 
 class FamilyRecreationsController extends Controller
 {
@@ -93,15 +94,34 @@ class FamilyRecreationsController extends Controller
     /**
      * @param AddTourRequest $createRequest
      */
-    public function adminUpdate(UpdateTourRequest $updateRequest, $id)
+    public function adminUpdate(UpdateFamilyRecreationRequest $updateRequest, $id)
     {
         $data = $updateRequest->request->all();
+        $file = $updateRequest->file();
+        $image = $file['image'] ? Image::make($file['image']) : false;
+        $image->resize(340, 225);
+        $imageName = $file['image'] ? time() . $file['image']->getClientOriginalName() : null;
+
 
         $family = FamilyRecreation::findOrFail($id);
         $family->title = $data['title'];
         $family->description = $data['description'];
 
+        if ($image) {
+            $family->image = $imageName;
+        }
+
+        $oldImage = $family->image;
+
         if ($family->save()) {
+
+            if ($image) {
+                if (!is_dir(public_path('images/uploads/family/' . $family->id))) {
+                    mkdir('images/uploads/family/' . $family->id, 0777);
+                }
+                $image->save(public_path('images/uploads/family/' . $family->id . '/' . $imageName));
+            }
+
             return redirect()->route('family_list');
         }
     }
@@ -118,7 +138,7 @@ class FamilyRecreationsController extends Controller
 
     public function index()
     {
-        $family = FamilyRecreation::paginate(6);
+        $family = FamilyRecreation::paginate(12);
 
         return view('family.index', ['family' => $family]);
     }

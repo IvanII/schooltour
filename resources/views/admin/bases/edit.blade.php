@@ -8,7 +8,7 @@
                     <div class="panel-heading">Редактирование базы отдыха</div>
 
                     <div class="panel-body">
-                        <form method="POST" action="{{action('RecreationBasesController@adminUpdate', ['id' => $base->id])}}">
+                        <form method="POST" enctype="multipart/form-data" action="{{action('RecreationBasesController@adminUpdate', ['id' => $base->id])}}">
                             <input name="_method" type="hidden" value="PUT">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -19,6 +19,10 @@
                             <div class="form-group">
                                 <label for="ckeditortext">Описание</label>
                                 <textarea name="description" class="form-control" id="ckeditortext">{{ $base->description }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Фото</label>
+                                <input name="image" type="file" class="form-control">
                             </div>
                             <button type="submit" class="btn btn-primary">Сохранить</button>
                         </form>

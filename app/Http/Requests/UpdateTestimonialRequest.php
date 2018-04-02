@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddFamilyRecreationRequest extends FormRequest
+class UpdateTestimonialRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class AddFamilyRecreationRequest extends FormRequest
     public function rules()
     {
         return [
-//            'title'  => 'required',
-//            'description'  => 'required',
+            'title'  => 'required',
+            'description'  => 'required',
 //            'image'  => 'required',
-//            'file_description'  => 'required',
         ];
     }
 
@@ -39,9 +38,9 @@ class AddFamilyRecreationRequest extends FormRequest
     public function messages()
     {
         return [
-//            'title.required' => 'Поле не может быть пустым',
-//            'description.required'  => 'Поле не может быть пустым',
-//            'image.file_description'  => 'Поле не может быть пустым',
+            'title.required' => 'Автор не может быть пустым',
+            'description.required'  => 'Отзыв не может быть пустым',
+//            'image.required'  => 'Фото не может быть пустым',
         ];
     }
 }

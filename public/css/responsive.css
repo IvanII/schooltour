@@ -587,6 +587,10 @@ a {
     color: #95badf;
 }
 
+.listings ul li .property_details h1 a:hover{
+    color: #95badf;
+}
+
 .listings ul li .property_details h1 a{
     text-decoration: none;
     color: #666464;

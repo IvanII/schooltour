@@ -18,9 +18,8 @@ Route::get('/testimonials', 'TestimonialsController@index')->name('testimonials_
 Route::get('/tours/{id}', 'ToursController@show')->name('tour_show');
 Route::get('/bases/{id}', 'RecreationBasesController@show')->name('base_show');
 Route::get('/family/{id}', 'FamilyRecreationsController@show')->name('family_show');
-Route::get('/contacts', function () {
-    return view('contacts');
-})->name('contacts');
+Route::get('/testimonials/{id}', 'TestimonialsController@show')->name('testimonial_show');
+Route::get('/contacts', 'ContactsController@show')->name('contacts');
 
 Route::get('/', function () {
     return view('home');
@@ -62,5 +61,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'] ,function () {
     Route::get('/testimonials/edit/{id}', 'TestimonialsController@adminEdit')->name('testimonials_edit');
     Route::put('/testimonials/update/{id}', 'TestimonialsController@adminUpdate');
     Route::delete('/testimonials/delete/{id}', 'TestimonialsController@adminDestroy')->name('testimonials_delete');
+
+    //Contacts
+    Route::get('/contacts/edit', 'ContactsController@adminEdit')->name('contacts_edit');
+    Route::put('/contacts/update', 'ContactsController@adminUpdate')->name('contacts_update');
 });
 

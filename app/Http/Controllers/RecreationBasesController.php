@@ -89,12 +89,31 @@ class RecreationBasesController extends Controller
     public function adminUpdate(UpdateBaseRequest $updateRequest, $id)
     {
         $data = $updateRequest->request->all();
+        $file = $updateRequest->file();
+        $image = $file['image'] ? Image::make($file['image']) : false;
+        $image->resize(340, 225);
+        $imageName = time() . $file['image']->getClientOriginalName();
 
         $base = RecreationBase::findOrFail($id);
         $base->title = $data['title'];
         $base->description = $data['description'];
 
+        $oldImage = $base->image;
+
+        if ($image) {
+            $base->image = $imageName;
+        }
+
         if ($base->save()) {
+
+            if ($image) {
+                if (!is_dir(public_path('images/uploads/bases/' . $base->id))) {
+                    mkdir('images/uploads/bases/' . $base->id, 0777);
+                }
+
+                $image->save(public_path('images/uploads/bases/' . $base->id . '/' . $imageName));
+            }
+
             return redirect()->route('bases_list');
         }
     }
@@ -111,7 +130,7 @@ class RecreationBasesController extends Controller
 
     public function index()
     {
-        $bases = RecreationBase::paginate(10);
+        $bases = RecreationBase::paginate(12);
 
         return view('bases.index', ['bases' => $bases]);
     }
